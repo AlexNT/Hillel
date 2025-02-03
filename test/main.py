@@ -1,5 +1,3 @@
-import pdfkit
-
-pdfkit.from_url('http://google.com', 'D:/out.pdf')
-# pdfkit.from_file('test.html', 'out.pdf')
-# pdfkit.from_string('Hello!', 'out.pdf')
+a = (1, 2, [3, 6], 4, 5)
+a[2][0] = 0
+print(a)

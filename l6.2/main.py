@@ -1,4 +1,3 @@
-from multiprocessing.forkserver import set_forkserver_preload
 sec = int(input('Введіть число від 0 до 8640000:\n'))
 day, sec = divmod(sec, 24 * 60 * 60)       # рахуємо кількість днів
 hour, sec = divmod(sec, 60 * 60)           # рахуємо кількість годин
