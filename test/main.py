@@ -1,3 +1,7 @@
-a = (1, 2, [3, 6], 4, 5)
-a[2][0] = 0
-print(a)
+def reverse_words(sentence):
+    lst = []
+    for s in sentence.split(' '):
+        lst.append(s[::-1])
+    return ' '.join(lst)
+
+print(reverse_words('Hello world'))
