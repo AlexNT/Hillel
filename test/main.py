@@ -1,21 +1,26 @@
-def goes_after(word: str, first: str, second: str) -> bool:
-    if (word.find(first) > -1) and (word.find(first) + 1 == word.find(second)):
-        return True  
-    return False
+def between_markers(text: str, begin: str, end: str) -> str:
+    fr = text.find(begin)
+    se = text.find(end)
+    if fr == -1 and se == -1:
+        return text
+    elif fr == -1 and se > -1:
+        return text[:se]
+    elif fr > -1 and se == -1:
+        return text[fr + len(begin):]
+    return text[fr+len(begin):se]
 
 
 print("Example:")
-print(goes_after("world", "w", "o"))
+print(between_markers("What is >apple<", ">", "<"))
 
-# These "asserts" are used for self-checking
-assert goes_after("world", "w", "o") == True
-assert goes_after("world", "w", "r") == False
-assert goes_after("world", "l", "o") == False
-assert goes_after("panorama", "a", "n") == True
-assert goes_after("list", "l", "o") == False
-assert goes_after("", "l", "o") == False
-assert goes_after("list", "l", "l") == False
-assert goes_after("world", "d", "w") == False
-assert goes_after("Almaz", "a", "l") == False
+assert between_markers("What is >apple<", ">", "<") == "apple"
+assert (
+    between_markers("<head><title>My new site</title></head>", "<title>", "</title>")
+    == "My new site"
+)
+assert between_markers("No[/b] hi", "[b]", "[/b]") == "No"
+assert between_markers("No [b]hi", "[b]", "[/b]") == "hi"
+assert between_markers("No hi", "[b]", "[/b]") == "No hi"
+assert between_markers("No <hi>", ">", "<") == ""
 
 print("The mission is done! Click 'Check Solution' to earn rewards!")
