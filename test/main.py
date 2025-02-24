@@ -1,26 +1,29 @@
-def between_markers(text: str, begin: str, end: str) -> str:
-    fr = text.find(begin)
-    se = text.find(end)
-    if fr == -1 and se == -1:
-        return text
-    elif fr == -1 and se > -1:
-        return text[:se]
-    elif fr > -1 and se == -1:
-        return text[fr + len(begin):]
-    return text[fr+len(begin):se]
+from typing import List, Tuple
+
+def mountain_scape(tops):
+    points = set()  # Для хранения уникальных точек, покрытых треугольниками
+
+    for x, y in tops:
+        # Вычисляем основание треугольника
+        base_start = x - y + 1
+        base_end = x + y
+
+        # Перебираем основание и высоту, чтобы покрыть все точки в треугольнике
+        for i in range(base_start, base_end + 1):
+            for j in range(1, y + 1):
+                if abs(i - x) < j:
+                    points.add((i, j))
+
+    # Площадь — это количество уникальных точек
+    return len(points)
 
 
-print("Example:")
-print(between_markers("What is >apple<", ">", "<"))
+if __name__ == '__main__':
+    print("Example:")
+    print(mountain_scape([(1, 1), (4, 2), (7, 3)]))
 
-assert between_markers("What is >apple<", ">", "<") == "apple"
-assert (
-    between_markers("<head><title>My new site</title></head>", "<title>", "</title>")
-    == "My new site"
-)
-assert between_markers("No[/b] hi", "[b]", "[/b]") == "No"
-assert between_markers("No [b]hi", "[b]", "[/b]") == "hi"
-assert between_markers("No hi", "[b]", "[/b]") == "No hi"
-assert between_markers("No <hi>", ">", "<") == ""
-
-print("The mission is done! Click 'Check Solution' to earn rewards!")
+    # These "asserts" are used for self-checking and not for an auto-testing
+    assert mountain_scape([(1, 1), (4, 2), (7, 3)]) == 13
+    assert mountain_scape([(0, 2), (5, 3), (7, 5)]) == 29
+    assert mountain_scape([(1, 3), (5, 3), (5, 5), (8, 4)]) == 37
+    print("Coding complete? Click 'Check' to earn cool rewards!")
