@@ -1,6 +1,6 @@
 from student import Student
 
-# створення власного вийнятка
+# створення власного винятка
 class GroupLimitError(Exception):
     def __init__(self, message="Група не може містити більше 10 студентів."):
         self.message = message
